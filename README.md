@@ -20,7 +20,7 @@ While logger.py is running you can run the detector by running:
 
 > sudo python3 kldetect.py
 
-NOTE: You need to install the packages used in the logger and kldetector. Requirements.txt file/automatic script has not
+NOTE: You need to install the modules used in the logger and kldetector. Requirements.txt file/automatic script has not
 been created yet. 
 
 Why Sudo?

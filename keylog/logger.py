@@ -17,7 +17,7 @@ class Keylogger:
             to point to. The event callback has three attributes which are: name, scan_code
             (the ascii dec number for the char), time (timestamp)
         '''
-        # fixing special characters 
+        # fixing some special characters 
         
         char_name = event.name
         print(event.scan_code)

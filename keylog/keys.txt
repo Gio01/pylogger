@@ -1,4 +1,0 @@
-shift = 54
-/ = 53
-caps lock = 58
-

